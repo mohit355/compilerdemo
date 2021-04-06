@@ -1,0 +1,29 @@
+.editor {
+  margin-left: 30px;
+}
+
+.monacEditor {
+  display: inline-block;
+}
+
+.editor-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.editor-group > div {
+  margin: 10px;
+}
+
+#select-lang {
+  padding: 0 20px;
+}
+
+.lang__select {
+  width: 120%;
+  height: 120%;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(252, 247, 247) !important;
+}

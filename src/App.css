@@ -1,0 +1,19 @@
+input[type="submit"] {
+  background-color: #29247a;
+  border: none;
+  color: white;
+  padding: 10px 22px;
+  text-decoration: none;
+  margin: 4px 2px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: green;
+}
+
+/* .App {
+  text-align: center;
+} */
