@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./CodeArea.css";
 import MonacoEditor from "react-monaco-editor";
 import querystring from "querystring";
-import axios from "../../axios";
+import axios from "../../../axios";
+import Error from "../error/Error";
 
 export default function CodeArea() {
   const [code, setCode] = useState(
@@ -84,7 +85,11 @@ export default function CodeArea() {
           </label>
         </div>
 
-        <div id="monacEditor" className="monacEditor">
+        <div
+          id="monacEditor"
+          className="monacEditor"
+          style={{ textAlign: "left" }}
+        >
           <MonacoEditor
             width="700"
             height="400"
@@ -100,6 +105,17 @@ export default function CodeArea() {
           <br></br>
           <input type="submit" onClick={submitTextAra}></input>
         </div>
+      </div>
+
+      {/* CODE FOR ERROR BOX IF THERE IS ANY SYNTAX ERROR IN THE CODE DURING SUBMISSION */}
+
+      <div className="editor-group">
+        <div className="editor__label">
+          <label for="sourceCode">
+            <strong> Error </strong>
+          </label>
+        </div>
+        <Error></Error>
       </div>
     </div>
   );

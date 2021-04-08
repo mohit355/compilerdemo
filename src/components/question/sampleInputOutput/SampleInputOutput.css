@@ -1,0 +1,11 @@
+.sampleInOut {
+}
+
+.sampleInput,
+.sampleOutput {
+  border: solid 3px black;
+  width: 50%;
+}
+
+.sampleOutPut {
+}
