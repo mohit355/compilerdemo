@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import "./App.css";
-// import CodeArea from "./components/codeArea/CodeArea";
+import { AddQuestion } from "./components/addQuestion/AddQuestion";
+import { Contests } from "./components/contests/Contests";
 import Question from "./components/question/Question";
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {/* <CodeArea /> */}
-        <Question />
+        {/* <AddQuestion></AddQuestion> */}
+        {/* <Question /> */}
+        <Contests></Contests>
       </div>
     );
   }

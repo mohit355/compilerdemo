@@ -1,10 +1,17 @@
 import React from "react";
 import "./Error.css";
 
-export default function Error() {
+export default function Error(props) {
   return (
     <div className="errorBox">
-      <input type="textarea" value="error" className="errorBox-textarea" />
+      <textarea
+        className="errorBox-textarea"
+        name="errorBox"
+        rows="4"
+        cols="50"
+        value={props.error}
+        readOnly
+      ></textarea>
     </div>
   );
 }

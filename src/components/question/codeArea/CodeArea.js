@@ -10,6 +10,7 @@ export default function CodeArea() {
     "// Write or paste your code here to submit"
   );
   const [language, setLanguage] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (language === "") {
@@ -31,22 +32,24 @@ export default function CodeArea() {
 
   const submitTextAra = async (event) => {
     event.preventDefault();
-    const data = {
+    const jsonData = {
       lang: language,
       code: code,
     };
-    querystring.stringify(data);
+
+    // json to string
+    const data = querystring.stringify(jsonData);
+
     await axios
-      .post("/", querystring.stringify(data))
+      .post("/", data)
       .then((result) => {
-        console.log("====================================");
-        console.log(result);
-        console.log("====================================");
+        console.log("result: ", result);
+        setError(result.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("error : ", err);
       });
-    console.log("data ", data);
+    console.log("data ", jsonData);
   };
 
   const handleLanguage = (event) => {
@@ -70,10 +73,10 @@ export default function CodeArea() {
             onChange={handleLanguage}
           >
             <option value="c++">C++ (GCC 9.2.1)</option>
-            <option value="c++">C (GCC 9.2.1)</option>
-            <option value="Java">Java (OpenJDK 11.0.6)</option>
-            <option value="Python">Python (3.8.2)</option>
-            <option value="Nodejs">Javascript (Node.js 12.16.1)</option>
+            <option value="c">C (GCC 9.2.1)</option>
+            <option value="java">Java (OpenJDK 11.0.6)</option>
+            <option value="python">Python (3.8.2)</option>
+            <option value="nodejs">Javascript (Node.js 12.16.1)</option>
           </select>
         </div>
       </div>
@@ -115,7 +118,7 @@ export default function CodeArea() {
             <strong> Error </strong>
           </label>
         </div>
-        <Error></Error>
+        <Error error={error}></Error>
       </div>
     </div>
   );
