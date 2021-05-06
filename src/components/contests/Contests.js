@@ -1,7 +1,8 @@
 import React from "react";
 import "./Contests.css";
+import Qname from "./question/Qname";
 
-export const Contests = () => {
+const Contests = () => {
   return (
     <div className="contests">
       <div className="contests_questions">
@@ -14,26 +15,11 @@ export const Contests = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-            </tr>
-            <tr>
-              <td>Centro comercial Moctezuma</td>
-              <td>Francisco Chang</td>
-              <td>Mexico</td>
-            </tr>
-            <tr>
-              <td>Ernst Handel</td>
-              <td>Roland Mendel</td>
-              <td>Austria</td>
-            </tr>
-            <tr>
-              <td>Island Trading</td>
-              <td>Helen Bennett</td>
-              <td>UK</td>
-            </tr>
+            <Qname
+              name="Question1 eiufghe kejfhei"
+              code="QUESTION"
+              submission="4"
+            ></Qname>
           </tbody>
         </table>
       </div>
@@ -41,3 +27,5 @@ export const Contests = () => {
     </div>
   );
 };
+
+export default Contests;

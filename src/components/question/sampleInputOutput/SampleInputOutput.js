@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SampleInputOutput.css";
 
-export default function SampleInputOutput() {
+export default function SampleInputOutput(props) {
+  console.log("props ", props.sample[0]);
+  useEffect(() => {
+    props.sample.map((val) => {
+      console.log(val.stringValue);
+    });
+  }, [props.sample]);
+
   return (
     <div className="sampleInOut">
       <div className="sampleInput">
@@ -12,13 +19,17 @@ export default function SampleInputOutput() {
             </tr>
           </thead>
           <tbody>
-            <tr>inputs1</tr>
-            <tr>inputs1</tr>
-            <tr>inputs1</tr>
-            <tr>inputs1</tr>
+            {props.sample.map((val) => {
+              return (
+                <tr>
+                  <td> {val.stringValue} </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
+
       <br></br>
       <div className="sampleOutput">
         <table>
@@ -28,9 +39,6 @@ export default function SampleInputOutput() {
             </tr>
           </thead>
           <tbody>
-            <tr>output1</tr>
-            <tr>output1</tr>
-            <tr>output1</tr>
             <tr>output1</tr>
           </tbody>
         </table>

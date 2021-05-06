@@ -1,30 +1,38 @@
-import React from "react";
+import React, { useState } from 'react';
 
-export const SampleTest = (props) => {
-  return (
-    <div className="sampleTest">
-      <div className="sampleInput">
-        <label for="sampleTestInput">Sample Input</label>
-        <textarea
-          onChange={props.handleSampleInput}
-          id="sampleTestInput"
-          name="sampleTestInput"
-          rows="4"
-          cols="50"
-          required
-        />
-      </div>
-      <div className="sampleOutput">
-        <label for="sampleTestOutput">Sample Output</label>
-        <textarea
-          onChange={props.handleSampleOutput}
-          id="sampleTestOutput"
-          name="sampleTestOutput"
-          rows="4"
-          cols="50"
-          required
-        />
-      </div>
-    </div>
-  );
-};
+function SampleTest(props) {
+    
+    const [input, setInput] = useState("");
+    const [output, setOutput] = useState("");
+
+    function inputChangeHandler(event) {
+        setInput(event.target.value);
+    }
+    function outputChangeHandler(event) {
+        setOutput(event.target.value);
+    }
+
+    function setTest() {
+        const inp = input;
+        const out = output;
+        props.addTest(inp, out);
+    }
+
+
+
+    return (
+        <div>
+            <form>
+                <label>
+                    Sample Test Input: <textarea name='input' onChange={inputChangeHandler}></textarea>
+                </label>
+                <label>
+                    Sample Test Output:<textarea name='output' onChange={outputChangeHandler}></textarea>
+                </label>
+                <button type='reset' onClick={setTest}>Add</button>
+            </form>
+        </div>
+    );
+}
+
+export default SampleTest;
