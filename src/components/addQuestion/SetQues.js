@@ -9,7 +9,7 @@ function SetQues() {
   const [title, setTitle] = useState("");
   const [statement, setStatement] = useState("");
   const [sampleTests, setSampleTests] = useState([]);
-  const [HiddenTests, setHiddenTests] = useState([]);
+  const [hiddenTests, setHiddenTests] = useState([]);
   const [questionID, setQuestionID] = useState("");
 
   function titleChangeHandler(value) {
@@ -23,36 +23,29 @@ function SetQues() {
     const prev = [...sampleTests, ...temp];
     setSampleTests(prev);
   }
+
   function AddHiddenTestHandler(inp, out) {
     const temp = [inp, out];
-    const prev = [...HiddenTests, ...temp];
+    const prev = [...hiddenTests, ...temp];
     setHiddenTests(prev);
   }
   function questionIDChangeHandler(event) {
     setQuestionID(event.target.value);
   }
   function submitHandler(event) {
-    event.prevenDefault();
+    event.preventDefault();
     var data = {
       qid: questionID,
       stmt: statement,
       title: title,
+      sample: sampleTests,
+      hidden: hiddenTests,
     };
-    // let n = sampleTests.length;
-    // var i;
 
-    // for (i = 0; i < n; i++) {
-    //   const new_data = { ...data, ["STest" + i]: sampleTests[i] };
-    //   data = new_data;
-    // }
-    // n = HiddenTests.length;
-    // for (i = 0; i < n; i++) {
-    //   const new_data = { ...data, ["HTest" + i]: HiddenTests[i] };
-    //   data = new_data;
-    // }
     querystring.stringify(data);
     Axios.post("/setQues", querystring.stringify(data));
   }
+
   return (
     <form>
       <label>

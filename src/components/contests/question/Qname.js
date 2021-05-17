@@ -6,7 +6,7 @@ import * as actions from "../../../store/actions/actions";
 const Qname = (props) => {
   useEffect(() => {
     console.log("=====dddddddddd===============================");
-    console.log(props.qname);
+    console.log("name", props.qname);
     console.log(props.redirectToQuestion);
     console.log("====================================");
   }, [props.qname, props.redirectToQuestion]);
@@ -16,9 +16,7 @@ const Qname = (props) => {
   } else {
     return (
       <tr>
-        <td onClick={props.onQuestionClick}>{props.name}</td>
-        <td>{props.code}</td>
-        <td>{props.submission}</td>
+        <td onClick={() => props.onQuestionClick(props.qid)}>{props.qid}</td>
       </tr>
     );
   }
@@ -33,7 +31,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onQuestionClick: (qid) => dispatch(actions.handleQuestionOpen("question3")),
+    onQuestionClick: (qid) => dispatch(actions.handleQuestionOpen(qid)),
   };
 };
 

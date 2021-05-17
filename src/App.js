@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import { Route, Switch, withRouter, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import { Route, Switch } from "react-router-dom";
 import Contests from "./components/contests/Contests";
 import SetQuestion from "./components/addQuestion/SetQues";
 import Question from "./components/question/Question";
 import CreateContest from "./components/createContest/CreateContest";
+import ContestPage from "./components/contestPage/ContestPage";
 
 class App extends React.Component {
   render() {
     return (
       <Switch>
         <Route path="/question" component={Question} />
-        <Route path="/question" component={SetQuestion} />
-        {/* <Route path="/addQuestion" component={SetQuestion} /> */}
+        {/* <Route path="/setQuestion" component={SetQuestion} /> */}
+        <Route path="/addQuestion" component={SetQuestion} />
         <Route path="/createContest" component={CreateContest} />
-        <Route path="/" component={Contests} />
-        <Contests></Contests>;
+        <Route path="/contests" component={Contests} />
+        <Route path="/" component={ContestPage} />
       </Switch>
     );
   }

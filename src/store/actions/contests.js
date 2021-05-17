@@ -39,6 +39,9 @@ export const handleQuestionOpen = (qid) => {
     axios
       .post("/getQues", querystring.stringify(id))
       .then((response) => {
+        console.log("====================================");
+        console.log(response.data);
+        console.log("====================================");
         dispatch(
           setQuestionAndEditor(
             response.data.title.stringValue,

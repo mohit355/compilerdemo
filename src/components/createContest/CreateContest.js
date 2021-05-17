@@ -21,16 +21,19 @@ const CreateContest = () => {
   }
 
   function QuestionIDADDHandler() {
-    const updateData = data;
-    updateData[num] = id;
-    setData({ updateData });
+    const oldData = data;
+    const newData = { ...oldData, [num]: id };
+    setData(newData);
   }
 
-  function submitHandler() {
-    const updateData = data;
-    updateData["contestID"] = contestID;
-    querystring.stringify(updateData);
-    Axios.post("/addContest", querystring.stringify(updateData));
+  function submitHandler(event) {
+    event.preventDefault();
+    const oldData = data;
+    const newData = { ...oldData, contestID: contestID };
+    querystring.stringify(newData);
+    Axios.post("/addContest", querystring.stringify(newData)).then((res) => {
+      console.log(res);
+    });
   }
 
   return (
@@ -41,22 +44,22 @@ const CreateContest = () => {
         <br />
       </label>
       <form>
-      <label>
-        Question Number:
-        <input
-          type="text"
-          name="questionNumber"
-          onChange={questionNumberHandler}
-        />
-        Question ID :
-        <input type="text" name="questionID" onChange={QuestionIDHandler} />
-        <button type="reset" onSubmit={QuestionIDADDHandler}>
-          Add
-        </button>
-      </label>
+        <label>
+          Question Number:
+          <input
+            type="text"
+            name="questionNumber"
+            onChange={questionNumberHandler}
+          />
+          Question ID :
+          <input type="text" name="questionID" onChange={QuestionIDHandler} />
+          <button type="reset" onClick={QuestionIDADDHandler}>
+            Add
+          </button>
+        </label>
       </form>
       <br />
-      <button type="submit" onSubmit={submitHandler}>
+      <button type="submit" onClick={submitHandler}>
         Submit
       </button>
     </form>

@@ -1,25 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Contests.css";
 import Qname from "./question/Qname";
+import * as actions from "../../store/actions/actions";
+import { connect } from "react-redux";
 
-const Contests = () => {
+const Contests = (props) => {
+  useEffect(() => {
+    console.log("on contest ", props.questionIds[1]);
+  }, [props.questionIds]);
+
   return (
     <div className="contests">
       <div className="contests_questions">
         <table>
           <thead>
             <tr>
-              <th>Name</th>
               <th>Code</th>
-              <th>Successfull submission</th>
             </tr>
           </thead>
           <tbody>
-            <Qname
-              name="Question1 eiufghe kejfhei"
-              code="QUESTION"
-              submission="4"
-            ></Qname>
+            {props.questionIds[1].map((qid, index) => {
+              return <Qname key={index} name={qid} qid={qid}></Qname>;
+            })}
           </tbody>
         </table>
       </div>
@@ -28,4 +30,15 @@ const Contests = () => {
   );
 };
 
-export default Contests;
+const mapStateToProps = (state) => {
+  return {
+    questionIds: state.contestPage.questionIds,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchContests: () => dispatch(actions.fetchContest()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Contests);
