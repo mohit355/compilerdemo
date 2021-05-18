@@ -32,7 +32,7 @@ function SetQues() {
   function questionIDChangeHandler(event) {
     setQuestionID(event.target.value);
   }
-  function submitHandler(event) {
+  const submitHandler = async (event) => {
     event.preventDefault();
     var data = {
       qid: questionID,
@@ -43,8 +43,14 @@ function SetQues() {
     };
 
     querystring.stringify(data);
-    Axios.post("/setQuestion", querystring.stringify(data));
-  }
+    await Axios.post("/setQuestion", querystring.stringify(data))
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <form>

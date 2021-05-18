@@ -17,8 +17,8 @@ export const showContestQuestionsCode = (contestId, qids) => {
 };
 
 export const fetchContest = () => {
-  return (dispatch) => {
-    axios
+  return async (dispatch) => {
+    await axios
       .get("/fetchContests")
       .then((res) => {
         dispatch(setContestQuestions(res.data));

@@ -26,12 +26,12 @@ const CreateContest = () => {
     setData(newData);
   }
 
-  function submitHandler(event) {
+  const submitHandler = async (event) => {
     event.preventDefault();
     const oldData = data;
     const newData = { ...oldData, contestID: contestID };
     querystring.stringify(newData);
-    Axios.post("/addContest", querystring.stringify(newData))
+    await Axios.post("/addContest", querystring.stringify(newData))
       .then((res) => {
         console.log("====================================");
         console.log(res);
@@ -40,7 +40,7 @@ const CreateContest = () => {
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   return (
     <form>

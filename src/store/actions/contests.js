@@ -41,8 +41,8 @@ export const showError = () => {
 
 export const handleQuestionOpen = (qid) => {
   const id = { id: qid };
-  return (dispatch) => {
-    axios
+  return async (dispatch) => {
+    await axios
       .post("/getQuestion", querystring.stringify(id))
       .then((response) => {
         console.log("====================================");
