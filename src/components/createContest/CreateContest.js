@@ -31,9 +31,15 @@ const CreateContest = () => {
     const oldData = data;
     const newData = { ...oldData, contestID: contestID };
     querystring.stringify(newData);
-    Axios.post("/addContest", querystring.stringify(newData)).then((res) => {
-      console.log(res);
-    });
+    Axios.post("/addContest", querystring.stringify(newData))
+      .then((res) => {
+        console.log("====================================");
+        console.log(res);
+        console.log("====================================");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (

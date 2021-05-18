@@ -20,7 +20,7 @@ function Question(props) {
     <div className="question">
       <div>{props.prblmStatement} </div>
       <SampleInputOutput sample={sample} />
-      <CodeArea />
+      <CodeArea qid={props.qid} />
     </div>
   );
 }
@@ -29,6 +29,7 @@ const mapStateToProps = (state) => {
   return {
     prblmStatement: state.contest.prblmstatement,
     prblmTitle: state.contest.prblmtitle,
+    qid: state.contest.qid,
     prblmSampleTest: state.contest.prblmsampletest,
   };
 };

@@ -4,19 +4,10 @@ import MonacoEditor from "react-monaco-editor";
 import querystring from "querystring";
 import axios from "../../../axios";
 import Error from "../error/Error";
-// function CodeArea() {
-//   const [code, setCode] = useState(
-//     "
-//   );
-//   const [language, setLanguage] = useState("");
-//   const [error, setError] = useState(null);
-//   const [fileExt, setFileExt] = useState("");
+import * as actions from "../../../store/actions/actions";
+import { connect } from "react-redux";
 
-// }
-
-// export default CodeArea;
-
-export default class CodeArea extends React.Component {
+class CodeArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,6 +15,7 @@ export default class CodeArea extends React.Component {
       language: "",
       error: "",
       fileExt: "",
+      questionId: "",
     };
   }
 
@@ -73,6 +65,7 @@ export default class CodeArea extends React.Component {
     const jsonData = {
       code: this.state.code,
       file_ext: setFileExt,
+      questionID: this.props.qid,
     };
 
     console.log("====================================");
@@ -82,17 +75,16 @@ export default class CodeArea extends React.Component {
     const data = querystring.stringify(jsonData);
 
     await axios
-      .post("/", data)
+      .post("/judge", data)
       .then((result) => {
         console.log("result: ", result);
-        this.setState({
-          error: result.error,
-        });
+        // this.setState({
+        //   error: result.error,
+        // });
       })
       .catch((err) => {
         console.log("error : ", err);
       });
-    console.log("data ", jsonData);
   };
   render() {
     return (
@@ -163,3 +155,18 @@ export default class CodeArea extends React.Component {
     );
   }
 }
+
+// const mapStateToProps = (state) => {
+//   return {
+//     qname: state.contest.prblmstatement,
+//     redirectToQuestion: state.contest.redirectTOQuestion,
+//   };
+// };
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     onQuestionClick: (qid) => dispatch(actions.handleQuestionOpen(qid)),
+//   };
+// };
+
+export default CodeArea;

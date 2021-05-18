@@ -43,7 +43,7 @@ function SetQues() {
     };
 
     querystring.stringify(data);
-    Axios.post("/setQues", querystring.stringify(data));
+    Axios.post("/setQuestion", querystring.stringify(data));
   }
 
   return (

@@ -1,2 +1,2 @@
-export { handleQuestionOpen, initContest } from "./contests";
+export { handleQuestionOpen } from "./contests";
 export { fetchContest, showContestQuestionsCode } from "./contestPage";

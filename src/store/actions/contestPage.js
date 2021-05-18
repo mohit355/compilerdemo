@@ -19,10 +19,14 @@ export const showContestQuestionsCode = (contestId, qids) => {
 export const fetchContest = () => {
   return (dispatch) => {
     axios
-      .get("/fetchContest")
+      .get("/fetchContests")
       .then((res) => {
         dispatch(setContestQuestions(res.data));
       })
-      .catch();
+      .catch((error) => {
+        console.log("====================================");
+        console.log(error);
+        console.log("====================================");
+      });
   };
 };
