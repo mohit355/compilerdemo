@@ -1,28 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { Component } from "react";
 import CodeArea from "./codeArea/CodeArea";
 import SampleInputOutput from "./sampleInputOutput/SampleInputOutput";
 import { connect } from "react-redux";
 import "./Question.css";
+import * as actions from "../../store/actions/actions";
 
-function Question(props) {
-  const [sample, setSample] = useState([]);
+class Question extends Component {
+  // const [sample, setSample] = useState([]);
 
-  useEffect(() => {
-    const n = props.prblmSampleTest.length;
+  constructor(props) {
+    super(props);
+    this.state = {
+      sample: [],
+    };
+  }
+
+  componentDidMount() {
+    // console.log("hello", sessionStorage.getItem("qid"));
+    // this.props.onQuestionClick(sessionStorage.getItem("qid"));
+    const n = this.props.prblmSampleTest.length;
     var inp = [];
     for (var i = 0; i < n; i += 2) {
-      inp.push([props.prblmSampleTest[i], props.prblmSampleTest[i + 1]]);
+      inp.push([
+        this.props.prblmSampleTest[i],
+        this.props.prblmSampleTest[i + 1],
+      ]);
     }
-    setSample(inp);
-  }, [props.prblmStatement, props.prblmTitle, props.prblmSampleTest]);
 
-  return (
-    <div className="question">
-      <div>{props.prblmStatement} </div>
-      <SampleInputOutput sample={sample} />
-      <CodeArea qid={props.qid} />
-    </div>
-  );
+    this.setState({
+      sample: inp,
+    });
+
+    window.onbeforeunload = function (x) {
+      return "";
+    };
+  }
+
+  static shouldComponentUpdate = () => {
+    return false;
+  };
+  render() {
+    return (
+      <div className="question">
+        <div>
+          <div>{this.props.prblmStatement} </div>
+          <SampleInputOutput sample={this.state.sample} />
+          <CodeArea qid={this.props.qid} isReload={false} />
+        </div>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -35,7 +62,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    onQuestionClick: (qid) => dispatch(actions.handleQuestionOpen(qid)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);

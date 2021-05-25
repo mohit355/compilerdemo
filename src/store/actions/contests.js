@@ -30,6 +30,13 @@ export const setQuestionAndEditor = (
   };
 };
 
+export const showContestQuestionsCode = (contestId, qids) => {
+  return {
+    type: actionTypes.SET_CONTEST_QUESTIONS_CODE,
+    contestId: contestId,
+    qids: qids,
+  };
+};
 export const showError = () => {
   return {
     type: actionTypes.SET_QUESTIONS,
@@ -39,7 +46,26 @@ export const showError = () => {
   };
 };
 
+export const getContest = (contestId) => {
+  const id = { id: contestId };
+  return (dispatch) => {
+    axios
+      .post("/getContest", querystring.stringify(id))
+      .then((response) => {
+        var qids = [];
+        response.data.map((id) => {
+          qids.push(id.stringValue);
+          return 0;
+        });
+        console.log("get qids ", qids);
+        dispatch(showContestQuestionsCode(contestId, qids));
+      })
+      .catch((error) => {});
+  };
+};
+
 export const handleQuestionOpen = (qid) => {
+  sessionStorage.setItem("qid", qid);
   const id = { id: qid };
   return async (dispatch) => {
     await axios

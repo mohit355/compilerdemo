@@ -9,6 +9,7 @@ export const setContestQuestions = (datas) => {
 };
 
 export const showContestQuestionsCode = (contestId, qids) => {
+  sessionStorage.setItem("contestId", contestId);
   return {
     type: actionTypes.SET_CONTEST_QUESTIONS_CODE,
     contestId: contestId,
@@ -16,7 +17,7 @@ export const showContestQuestionsCode = (contestId, qids) => {
   };
 };
 
-export const fetchContest = () => {
+export const fetchAllContests = () => {
   return async (dispatch) => {
     await axios
       .get("/fetchContests")

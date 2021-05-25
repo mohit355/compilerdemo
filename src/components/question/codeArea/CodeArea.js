@@ -4,8 +4,7 @@ import MonacoEditor from "react-monaco-editor";
 import querystring from "querystring";
 import axios from "../../../axios";
 import Error from "../error/Error";
-import * as actions from "../../../store/actions/actions";
-import { connect } from "react-redux";
+import { Redirect } from "react-router";
 
 class CodeArea extends React.Component {
   constructor(props) {
@@ -23,11 +22,11 @@ class CodeArea extends React.Component {
     selectOnLineNumbers: true,
   };
 
-  editorDidMount = (editor, monaco) => {
+  editorDidMount = (editor) => {
     editor.focus();
   };
 
-  onChange = (newValue, e) => {
+  onChange = (newValue) => {
     this.setState({
       code: newValue,
     });
@@ -68,9 +67,6 @@ class CodeArea extends React.Component {
       questionID: this.props.qid,
     };
 
-    console.log("====================================");
-    console.log(jsonData);
-    console.log("====================================");
     // json to string
     const data = querystring.stringify(jsonData);
 
@@ -78,9 +74,6 @@ class CodeArea extends React.Component {
       .post("/judge", data)
       .then((result) => {
         console.log("result: ", result);
-        // this.setState({
-        //   error: result.error,
-        // });
       })
       .catch((err) => {
         console.log("error : ", err);

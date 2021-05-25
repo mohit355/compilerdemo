@@ -6,7 +6,7 @@ import { Redirect } from "react-router";
 
 const ContestPage = (props) => {
   useEffect(() => {
-    props.fetchContests();
+    props.fetchAllContests();
   }, [props.isRefreshed]);
 
   // var showQuestions = (id, index) => {
@@ -14,7 +14,7 @@ const ContestPage = (props) => {
   // };
 
   if (props.goToContest === true) {
-    return <Redirect to="/contests" />;
+    return <Redirect to="/contest" />;
   } else {
     return (
       <div>
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchContests: () => dispatch(actions.fetchContest()),
+    fetchAllContests: () => dispatch(actions.fetchAllContests()),
   };
 };
 

@@ -17,7 +17,8 @@ const getContests = (state, action) => {
 
 const setQuestionsCode = (state, action) => {
   const updatedState = {
-    questionIds: [action.contestId, action.qids],
+    // questionIds: [action.contestId, action.qids],
+    questionIds: action.qids,
     goToContest: true,
   };
 

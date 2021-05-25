@@ -6,8 +6,10 @@ import { connect } from "react-redux";
 
 const Contests = (props) => {
   useEffect(() => {
-    console.log("on contest ", props.questionIds[1]);
-  }, [props.questionIds]);
+    var session = sessionStorage.getItem("contestId");
+    console.log("session ", session);
+    props.getContest(session);
+  }, []);
 
   return (
     <div className="contests">
@@ -19,7 +21,7 @@ const Contests = (props) => {
             </tr>
           </thead>
           <tbody>
-            {props.questionIds[1].map((qid, index) => {
+            {props.questionIds.map((qid, index) => {
               return <Qname key={index} name={qid} qid={qid}></Qname>;
             })}
           </tbody>
@@ -38,7 +40,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchContests: () => dispatch(actions.fetchContest()),
+    getContest: (session) => dispatch(actions.getContest(session)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Contests);
