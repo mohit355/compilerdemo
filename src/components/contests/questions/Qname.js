@@ -4,12 +4,7 @@ import { Redirect } from "react-router";
 import * as actions from "../../../store/actions/actions";
 
 const Qname = (props) => {
-  useEffect(() => {
-    console.log("=====dddddddddd===============================");
-    console.log("name", props.qname);
-    console.log(props.redirectToQuestion);
-    console.log("====================================");
-  }, [props.qname, props.redirectToQuestion]);
+  //
 
   if (props.redirectToQuestion) {
     return <Redirect to="/question" />;

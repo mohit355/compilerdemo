@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
-import "./Contests.css";
-import Qname from "./question/Qname";
+import "./Contest.css";
+import Qname from "./questions/Qname";
 import * as actions from "../../store/actions/actions";
 import { connect } from "react-redux";
 
 const Contests = (props) => {
   useEffect(() => {
     var session = sessionStorage.getItem("contestId");
-    console.log("session ", session);
     props.getContest(session);
   }, []);
 
@@ -27,7 +26,6 @@ const Contests = (props) => {
           </tbody>
         </table>
       </div>
-      <div className="contests_rank">rank</div>
     </div>
   );
 };

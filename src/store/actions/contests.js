@@ -66,25 +66,37 @@ export const getContest = (contestId) => {
 
 export const handleQuestionOpen = (qid) => {
   sessionStorage.setItem("qid", qid);
+
   const id = { id: qid };
-  return async (dispatch) => {
-    await axios
+  return (dispatch) => {
+    axios
       .post("/getQuestion", querystring.stringify(id))
       .then((response) => {
         console.log("====================================");
         console.log(response.data);
         console.log("====================================");
+        const n = response.data.sample.arrayValue.values.length;
+        var inp = [];
+        for (var i = 0; i < n; i += 2) {
+          inp.push([
+            response.data.sample.arrayValue.values[i],
+            response.data.sample.arrayValue.values[i + 1],
+          ]);
+        }
+
+        console.log("input ", inp);
+
         dispatch(
           setQuestionAndEditor(
             response.data.title.stringValue,
             response.data.stmt.stringValue,
-            response.data.sample.arrayValue.values,
+            inp,
             qid
           )
         );
       })
       .catch((error) => {
-        dispatch(error);
+        console.log(error);
       });
   };
 };
