@@ -9,31 +9,69 @@ import ContestPage from "./components/contestPage/ContestPage";
 import CodeArea from "./components/question/codeArea/CodeArea";
 import SignUp from "./components/auth/SignUp";
 import SignIn from "./components/auth/SignIn";
+import Authenticate from "./components/auth/Authenticate";
+import * as actions from "./store/actions/actions";
+
+import { connect } from "react-redux";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isAuthenticated: true,
-    };
+    this.state = {};
   }
+
+  componentDidMount() {
+    var userName = localStorage.getItem("cpiiitkUserName");
+    var email = localStorage.getItem("cpiiitkEmail");
+    if (userName === null || email === null) {
+      this.props.setUserToLogged(10);
+    } else {
+      this.props.setUserToLogged(1);
+      console.log("====================================");
+      console.log(userName, email);
+      console.log("====================================");
+    }
+  }
+
   render() {
     return (
-      <Switch>
-        <Route exact path="/signin" component={SignIn} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/contest" component={Contest} />
-        <Route path="/editor" component={CodeArea} />
-        <Route path="/question" component={Question} />
-        <Route path="/setQuestion" component={SetQuestion} />
-        <Route path="/addContest" component={AddContest} />
-        <Route path="/" component={ContestPage} />
+      <div>
+        <Switch>
+          {this.props.isuserLogged ? (
+            <Authenticate>
+              <Route path="/contest" component={Contest} />
+              <Route path="/editor" component={CodeArea} />
+              <Route path="/question" component={Question} />
+              <Route path="/setQuestion" component={SetQuestion} />
+              <Route path="/addContest" component={AddContest} />
+            </Authenticate>
+          ) : (
+            <>
+              <Route exact path="/signin" component={SignIn} />
+              <Route path="/signup" component={SignUp} />
+            </>
+          )}
 
-        <Redirect to="/" />
-      </Switch>
+          <Route path="/editor" component={CodeArea} />
+        </Switch>
+        <Route path="/" component={ContestPage} />
+        {/* <Redirect to="/" /> */}
+      </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isuserLogged: state.auth.isUserLogedIn,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUserToLogged: (loggedIn) => dispatch(actions.setUserToLogged(loggedIn)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
