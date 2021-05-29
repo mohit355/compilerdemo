@@ -1,7 +1,26 @@
 import React, { Component } from "react";
 
-export default class Signin extends Component {
+export default class SignIn extends Component {
   render() {
-    return <div>SignIN</div>;
+    return (
+      <div>
+        <form>
+          <label>
+            User Name :
+            <input type="text" required />
+          </label>
+          <br />
+
+          <label>
+            Email :
+            <input type="email" required />
+          </label>
+          <br />
+          <br />
+
+          <input type="submit" value="SignIn" />
+        </form>
+      </div>
+    );
   }
 }

@@ -6,6 +6,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import contestsReducer from "./store/reducers/contests";
 import contestPageReducer from "./store/reducers/contestPage";
+import authentication from "./store/reducers/auth";
 import "./index.css";
 import App from "./App";
 
@@ -17,6 +18,7 @@ const composeEnhancers =
 const rootReducer = combineReducers({
   contest: contestsReducer,
   contestPage: contestPageReducer,
+  auth: authentication,
 });
 
 const store = createStore(
