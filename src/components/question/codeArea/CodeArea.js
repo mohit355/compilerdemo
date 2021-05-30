@@ -79,6 +79,7 @@ class CodeArea extends React.Component {
         console.log("error : ", err);
       });
   };
+
   render() {
     return (
       <div className="editor">
