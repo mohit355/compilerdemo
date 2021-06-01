@@ -2,7 +2,7 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
   isRegister: false,
-  isUserLogedIn: "",
+  isUserLogedIn: 10,
 };
 
 const onSignUpClick = (state, action) => {

@@ -4,6 +4,8 @@ import MonacoEditor from "react-monaco-editor";
 import querystring from "querystring";
 import axios from "../../../axios";
 import Error from "../error/Error";
+import { connect } from "react-redux";
+import * as actions from "../../../store/actions/actions";
 import { Redirect } from "react-router";
 
 class CodeArea extends React.Component {
@@ -12,7 +14,7 @@ class CodeArea extends React.Component {
     this.state = {
       code: "// Write or paste your code here to submit",
       language: "",
-      error: "",
+      error: "error",
       fileExt: "",
       questionId: "",
     };
@@ -37,7 +39,6 @@ class CodeArea extends React.Component {
     this.setState({
       language: event.target.value,
     });
-    console.log(event.target.value);
   };
 
   submitTextAra = async (event) => {
@@ -65,19 +66,12 @@ class CodeArea extends React.Component {
       code: this.state.code,
       file_ext: setFileExt,
       questionID: this.props.qid,
+      username: localStorage.getItem("cpiiitkUserName"),
     };
 
     // json to string
     const data = querystring.stringify(jsonData);
-
-    await axios
-      .post("/judge", data)
-      .then((result) => {
-        console.log("result: ", result);
-      })
-      .catch((err) => {
-        console.log("error : ", err);
-      });
+    this.props.getJudgeData(data);
   };
 
   render() {
@@ -140,27 +134,41 @@ class CodeArea extends React.Component {
         <div className="editor-group">
           <div className="editor__label">
             <label for="sourceCode">
-              <strong> Error </strong>
+              <strong>
+                {this.props.codeOutput.RE || this.props.codeOutput.CE
+                  ? `Error`
+                  : `Output`}
+              </strong>
             </label>
           </div>
-          <Error error={this.error}></Error>
+          {this.props.codeOutput.RE || this.props.codeOutput.CE ? (
+            <Error error="Run time or Syntax error"></Error>
+          ) : (
+            <div>
+              <p>
+                <span>AC : </span> {this.props.codeOutput.AC}
+              </p>
+              <p>
+                <span>WA : </span> {this.props.codeOutput.WA}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     );
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     qname: state.contest.prblmstatement,
-//     redirectToQuestion: state.contest.redirectTOQuestion,
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    codeOutput: state.judge.codeOutput,
+  };
+};
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     onQuestionClick: (qid) => dispatch(actions.handleQuestionOpen(qid)),
-//   };
-// };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getJudgeData: (data) => dispatch(actions.getJudgeData(data)),
+  };
+};
 
-export default CodeArea;
+export default connect(mapStateToProps, mapDispatchToProps)(CodeArea);

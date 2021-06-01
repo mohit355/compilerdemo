@@ -7,8 +7,8 @@ export default function Error(props) {
       <textarea
         className="errorBox-textarea"
         name="errorBox"
-        rows="4"
-        cols="50"
+        rows="2"
+        cols="30"
         value={props.error}
         readOnly
       ></textarea>

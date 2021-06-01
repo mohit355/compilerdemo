@@ -9,7 +9,7 @@ import ContestPage from "./components/contestPage/ContestPage";
 import CodeArea from "./components/question/codeArea/CodeArea";
 import SignUp from "./components/auth/SignUp";
 import SignIn from "./components/auth/SignIn";
-import Authenticate from "./components/auth/Authenticate";
+import Hoc from "./components/HOC/Hoc";
 import * as actions from "./store/actions/actions";
 
 import { connect } from "react-redux";
@@ -38,24 +38,24 @@ class App extends React.Component {
     return (
       <div>
         <Switch>
-          {this.props.isuserLogged ? (
-            <Authenticate>
+          {!this.props.isuserLogged === 10 ? (
+            <Hoc>
               <Route path="/contest" component={Contest} />
               <Route path="/editor" component={CodeArea} />
               <Route path="/question" component={Question} />
               <Route path="/setQuestion" component={SetQuestion} />
               <Route path="/addContest" component={AddContest} />
-            </Authenticate>
+            </Hoc>
           ) : (
-            <>
+            <Hoc>
               <Route exact path="/signin" component={SignIn} />
               <Route path="/signup" component={SignUp} />
-            </>
+            </Hoc>
           )}
 
           <Route path="/editor" component={CodeArea} />
         </Switch>
-        <Route path="/" component={ContestPage} />
+        <Route exact path="/" component={ContestPage} />
         {/* <Redirect to="/" /> */}
       </div>
     );

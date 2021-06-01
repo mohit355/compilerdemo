@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import contestsReducer from "./store/reducers/contests";
 import contestPageReducer from "./store/reducers/contestPage";
 import authentication from "./store/reducers/auth";
+import judge from "./store/reducers/judge";
 import "./index.css";
 import App from "./App";
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   contest: contestsReducer,
   contestPage: contestPageReducer,
   auth: authentication,
+  judge: judge,
 });
 
 const store = createStore(
