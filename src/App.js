@@ -17,7 +17,6 @@ import { connect } from "react-redux";
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {};
   }
 
@@ -28,37 +27,36 @@ class App extends React.Component {
       this.props.setUserToLogged(10);
     } else {
       this.props.setUserToLogged(1);
-      console.log("====================================");
-      console.log(userName, email);
-      console.log("====================================");
     }
   }
 
   render() {
-    return (
-      <div>
-        <Switch>
-          {!this.props.isuserLogged === 10 ? (
-            <Hoc>
-              <Route path="/contest" component={Contest} />
-              <Route path="/editor" component={CodeArea} />
-              <Route path="/question" component={Question} />
-              <Route path="/setQuestion" component={SetQuestion} />
-              <Route path="/addContest" component={AddContest} />
-            </Hoc>
-          ) : (
-            <Hoc>
-              <Route exact path="/signin" component={SignIn} />
-              <Route path="/signup" component={SignUp} />
-            </Hoc>
-          )}
-
-          <Route path="/editor" component={CodeArea} />
-        </Switch>
+    let routes = (
+      <switch>
+        <Route exact path="/signin" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
         <Route exact path="/" component={ContestPage} />
-        {/* <Redirect to="/" /> */}
-      </div>
+        <Redirect to="/" />
+      </switch>
     );
+
+    if (this.props.isuserLogged !== 10) {
+      routes = (
+        <switch>
+          <Route path="/editor" component={CodeArea} />
+          <Route path="/contest" component={Contest} />
+          <Route path="/question" component={Question} />
+          <Route path="/setQuestion" component={SetQuestion} />
+          <Route path="/addContest" component={AddContest} />
+
+          <Route exact path="/" component={ContestPage} />
+
+          <Redirect to="/" />
+        </switch>
+      );
+    }
+
+    return <Hoc>{routes}</Hoc>;
   }
 }
 

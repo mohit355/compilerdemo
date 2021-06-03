@@ -41,9 +41,9 @@ class Hoc extends Component {
     }
     return (
       <div>
-        {/* {logDetails} */}
-        {localStorage.getItem("cpiiitkUserName")}
-        {/* {this.state.redirectSignIn ? <Redirect to="/signin"></Redirect> : null} */}
+        {logDetails}
+        {/* {localStorage.getItem("cpiiitkUserName")} */}
+        {this.state.redirectSignIn ? <Redirect to="/signin"></Redirect> : null}
         <div>{this.props.children}</div>
       </div>
     );

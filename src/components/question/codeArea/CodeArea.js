@@ -66,7 +66,7 @@ class CodeArea extends React.Component {
       code: this.state.code,
       file_ext: setFileExt,
       questionID: this.props.qid,
-      username: localStorage.getItem("cpiiitkUserName"),
+      email: localStorage.getItem("cpiiitkEmail"),
     };
 
     // json to string
