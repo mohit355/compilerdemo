@@ -9,12 +9,12 @@ const ContestPage = (props) => {
     props.fetchAllContests();
   }, [props.isRefreshed]);
 
-  // var showQuestions = (id, index) => {
-  //   console.log("index ", index);
-  // };
-
   if (props.goToContest === true) {
-    return <Redirect to="/contest" />;
+    if (props.isuserLogged === 1) {
+      return <Redirect to="/contest" />;
+    } else {
+      return <Redirect to="/auth" />;
+    }
   } else {
     return (
       <div>
@@ -30,6 +30,7 @@ const mapStateToProps = (state) => {
     goToContest: state.contestPage.goToContest,
     contestId: state.contestPage.constestId,
     isRefreshed: state.contestPage.onRefresh,
+    isuserLogged: state.auth.isUserLogedIn,
   };
 };
 

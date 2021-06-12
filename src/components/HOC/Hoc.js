@@ -3,6 +3,7 @@ import LogOut from "../auth/LogOut";
 import * as actions from "../../store/actions/actions";
 import { connect } from "react-redux";
 import SignIn from "../auth/SignIn";
+import NavigationItems from "../navigationItems/NavigationItems";
 import { Redirect } from "react-router";
 
 class Hoc extends Component {
@@ -16,34 +17,16 @@ class Hoc extends Component {
     });
   };
   render() {
-    console.log("userDetails", this.props.isuserLogged);
     var logDetails = "";
-
     if (this.props.isuserLogged === 1) {
-      logDetails = (
-        <>
-          {localStorage.getItem("cpiiitkUserName")}
-          <LogOut></LogOut>
-        </>
-      );
-    } else {
-      logDetails = (
-        <>
-          <form>
-            <input
-              onClick={this.handleSignInClick}
-              type="submit"
-              value="Sign In"
-            ></input>
-          </form>
-        </>
-      );
+      logDetails = <>{localStorage.getItem("cpiiitkUserName")}</>;
     }
     return (
       <div>
-        {logDetails}
-        {/* {localStorage.getItem("cpiiitkUserName")} */}
-        {this.state.redirectSignIn ? <Redirect to="/signin"></Redirect> : null}
+        <div>{logDetails}</div>
+        <NavigationItems
+          isAuthenticated={this.props.isuserLogged}
+        ></NavigationItems>
         <div>{this.props.children}</div>
       </div>
     );

@@ -8,9 +8,6 @@ class LogOut extends Component {
     event.preventDefault();
     localStorage.removeItem("cpiiitkUserName");
     localStorage.removeItem("cpiiitkEmail");
-    console.log("====================================");
-    console.log("LOGIUT");
-    console.log("====================================");
     this.props.setUserToLogged(10);
   };
   render() {

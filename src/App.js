@@ -13,6 +13,8 @@ import Hoc from "./components/HOC/Hoc";
 import * as actions from "./store/actions/actions";
 
 import { connect } from "react-redux";
+import LogOut from "./components/auth/LogOut";
+import AuthPage from "./components/auth/AuthPage";
 
 class App extends React.Component {
   constructor(props) {
@@ -32,27 +34,27 @@ class App extends React.Component {
 
   render() {
     let routes = (
-      <switch>
-        <Route exact path="/signin" component={SignIn} />
-        <Route path="/signup" component={SignUp} />
+      <Switch>
+        <Route path="/signin" component={AuthPage} />
+        <Route path="/signup" component={AuthPage} />
+        <Route path="/auth" component={AuthPage} />
         <Route exact path="/" component={ContestPage} />
         <Redirect to="/" />
-      </switch>
+      </Switch>
     );
 
     if (this.props.isuserLogged !== 10) {
       routes = (
-        <switch>
+        <Switch>
           <Route path="/editor" component={CodeArea} />
           <Route path="/contest" component={Contest} />
           <Route path="/question" component={Question} />
           <Route path="/setQuestion" component={SetQuestion} />
           <Route path="/addContest" component={AddContest} />
-
-          <Route exact path="/" component={ContestPage} />
-
+          <Route path="/logout" component={LogOut} />
+          <Route path="/" component={ContestPage} />
           <Redirect to="/" />
-        </switch>
+        </Switch>
       );
     }
 
