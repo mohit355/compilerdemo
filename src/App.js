@@ -7,11 +7,8 @@ import Question from "./components/question/Question";
 import AddContest from "./components/addContest/CreateContest";
 import ContestPage from "./components/contestPage/ContestPage";
 import CodeArea from "./components/question/codeArea/CodeArea";
-import SignUp from "./components/auth/SignUp";
-import SignIn from "./components/auth/SignIn";
 import Hoc from "./components/HOC/Hoc";
 import * as actions from "./store/actions/actions";
-
 import { connect } from "react-redux";
 import LogOut from "./components/auth/LogOut";
 import AuthPage from "./components/auth/AuthPage";
