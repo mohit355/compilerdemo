@@ -28,6 +28,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
+process.env.CI = false;
 const app = (
   <Provider store={store}>
     <BrowserRouter>
